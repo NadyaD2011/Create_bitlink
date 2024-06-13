@@ -45,7 +45,10 @@ def is_bitlink(user_url, api_token):
 
 def main():
     api_token = os.environ["BITLY_API_KEY"]
-    long_url = input('Введите ссылку: ')
+    parser = argparse.ArgumentParser()
+    parser.add_argument("long_url", help="Вашу ссылку")
+    args = parser.parse_args()
+    long_url = args.long_url
 
     try:
         if is_bitlink(user_url=long_url, api_token=api_token):
