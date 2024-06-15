@@ -1,6 +1,10 @@
 from urllib.parse import urlparse
 import requests
 import os
+from dotenv import load_dotenv
+
+
+load_dotenv()
 
 
 def shorten_link(api_token, long_url):
@@ -43,6 +47,7 @@ def is_bitlink(user_url, api_token):
     response = requests.get(bitlink_url, api_token, headers=headers)
     return response.ok
 
+
 def main():
     api_token = os.environ["BITLY_API_KEY"]
     parser = argparse.ArgumentParser()
@@ -57,6 +62,7 @@ def main():
             print(shorten_link(api_token, long_url))
     except requests.exceptions.HTTPError as error:
         print("Can't get data from server:\n{0}".format(error))
+
 
 if __name__ == '__main__':
     main()
